@@ -14,9 +14,9 @@ class UserController extends Controller
     {
     }
 
-    public function store(Request $request):JsonResponse
+    public function register(Request $request):JsonResponse
     {
-        return $this->userService->store($request->all());
+        return $this->userService->register($request->all());
     }
 
     public function login(Request $request):JsonResponse

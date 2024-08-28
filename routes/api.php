@@ -12,8 +12,12 @@ Route::get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::controller(UserController::class)->group(function (){
         Route::post('login', 'login');
+        Route::post('register', 'register');
     });
 
     Route::prefix('portal')->middleware('auth:sanctum')->group(function (){
+        Route::controller(UserController::class)->group(function (){
+
+        });
     });
 });

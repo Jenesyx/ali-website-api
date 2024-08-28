@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -46,9 +47,30 @@ class UserService
           }
       }
 
-      public function store($data):JsonResponse
+      public function register($data):JsonResponse
       {
-         dd($data);
+         $name = $data['name'];
+         $email = $data['email'];
+         $password = $data['password'];
+         $user = User::where('email', $email)->first();
+         if($user)
+         {
+             return response()->json([
+                 'status' => 'error',
+                 'message' => 'You have already registered with this email'
+             ], 409);
+         }
+
+         User::create([
+             'name' => $name,
+             'email' => $email,
+             'password' => Hash::make($password),
+         ]);
+
+          return response()->json([
+              'status' => 'status',
+              'message' => 'Your registration was successful'
+          ], 201);
       }
 
       public function show():JsonResponse
