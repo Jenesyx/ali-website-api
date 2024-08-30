@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,8 +17,10 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('portal')->middleware('auth:sanctum')->group(function (){
-        Route::controller(UserController::class)->group(function (){
+//        Route::controller(UserController::class)->group(function (){
+//
+//        });
 
-        });
+        Route::apiResource('product', ProductController::class);
     });
 });

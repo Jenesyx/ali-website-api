@@ -73,19 +73,5 @@ class UserService
           ], 201);
       }
 
-      public function show():JsonResponse
-      {
-         // Service method logic
-      }
-
-      public function update():JsonResponse
-      {
-         // Service method logic
-      }
-
-      public function destroy():JsonResponse
-      {
-         // Service method logic
-      }
 
 }
