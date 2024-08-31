@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\MaterialController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
@@ -22,5 +23,6 @@ Route::prefix('v1')->group(function () {
 //        });
 
         Route::apiResource('product', ProductController::class);
+        Route::apiResource('material', MaterialController::class);
     });
 });
