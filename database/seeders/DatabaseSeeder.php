@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(MaterialSeeder::class);
         $this->call(CustomSeeder::class);
+        $this->call(functionSeeder::class);
 
 
 //        User::factory()->create([
