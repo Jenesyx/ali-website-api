@@ -6,6 +6,14 @@ use App\Models\Functions;
 use Illuminate\Http\JsonResponse;
 class FunctionsService
 {
+
+    public function list()
+    {
+        return response()->json([
+            'data' => Functions::select(['id','name'])->get(),
+            'status' =>'success',
+        ]);
+    }
       public function index():JsonResponse
       {
          return response()->json([

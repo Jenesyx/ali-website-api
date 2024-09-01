@@ -13,7 +13,10 @@ class CustomController extends Controller
     public function __construct(protected CustomService $customService)
     {
     }
-
+    public function list():JsonResponse
+    {
+        return $this->customService->list();
+    }
     public function index():JsonResponse
     {
         return $this->customService->index();

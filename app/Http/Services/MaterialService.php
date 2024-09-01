@@ -6,6 +6,16 @@ use App\Models\Material;
 use Illuminate\Http\JsonResponse;
 class MaterialService
 {
+
+    public function list()
+    {
+        $data = Material::select(['id', 'name'])->get();
+        return response()->json([
+            'data' => $data,
+            'status' =>'success',
+        ]);
+
+    }
       public function index():JsonResponse
       {
          $data = Material::all();

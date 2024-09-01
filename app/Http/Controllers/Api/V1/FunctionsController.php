@@ -14,6 +14,12 @@ class FunctionsController extends Controller
     {
     }
 
+
+    public function list():JsonResponse
+    {
+        return $this->functionsService->list();
+    }
+
     public function index():JsonResponse
     {
         return $this->functionsService->index();

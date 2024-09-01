@@ -14,6 +14,10 @@ class MaterialController extends Controller
     {
     }
 
+    public function list():JsonResponse
+    {
+        return $this->materialService->list();
+    }
     public function index():JsonResponse
     {
         return $this->materialService->index();

@@ -6,6 +6,14 @@ use App\Models\Custom;
 use Illuminate\Http\JsonResponse;
 class CustomService
 {
+    public function list():JsonResponse
+    {
+        $data = Custom::select(['id', 'name'])->get();
+        return response()->json([
+            'data' => $data,
+            'status' =>'success',
+        ]);
+    }
     public function index():JsonResponse
     {
         $data = Custom::all();

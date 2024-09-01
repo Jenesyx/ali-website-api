@@ -19,9 +19,12 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('portal')->middleware('auth:sanctum')->group(function (){
-//        Route::controller(UserController::class)->group(function (){
-//
-//        });
+    // Route of lists  :
+        Route::get('material/list', [MaterialController::class,'list']);
+        Route::get('functions/list', [FunctionsController::class,'list']);
+        Route::get('custom/list', [CustomController::class,'list']);
+
+
 
         Route::apiResource('product', ProductController::class);
         Route::apiResource('material', MaterialController::class);

@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function __construct(protected ProductService $productService)
     {
     }
-
+    
     public function index():JsonResponse
     {
         return $this->productService->index();
