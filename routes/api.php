@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\CustomController;
 use App\Http\Controllers\Api\V1\FunctionsController;
 use App\Http\Controllers\Api\V1\MaterialController;
+use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
@@ -24,8 +25,11 @@ Route::prefix('v1')->group(function () {
         Route::get('functions/list', [FunctionsController::class,'list']);
         Route::get('custom/list', [CustomController::class,'list']);
 
+        Route::get('orderUser/{id}', [OrderController::class,'orderUser']);
 
 
+
+        Route::apiResource('order', OrderController::class);
         Route::apiResource('product', ProductController::class);
         Route::apiResource('material', MaterialController::class);
         Route::apiResource('custom', CustomController::class);
