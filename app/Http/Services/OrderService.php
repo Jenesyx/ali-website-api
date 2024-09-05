@@ -4,6 +4,8 @@ namespace App\Http\Services;
 
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+
 class OrderService
 {
 
@@ -28,7 +30,7 @@ class OrderService
       public function store($data):JsonResponse
       {
          Order::create([
-             'user_id' => $data['user_id'],
+             'user_id' => Auth::user()->id,
              'product_id' => $data['product_id'],
              'price' => $data['price'],
              'size' => $data['size'],
