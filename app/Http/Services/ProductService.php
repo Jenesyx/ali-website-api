@@ -85,6 +85,7 @@ class ProductService
               'data' => new ProductCollection($product),
               'status' =>'success',
           ]);
+
       }
 
       public function update():JsonResponse
