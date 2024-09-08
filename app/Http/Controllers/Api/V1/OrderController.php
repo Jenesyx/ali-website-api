@@ -14,11 +14,6 @@ class OrderController extends Controller
     {
     }
 
-    public function orderUser($id): JsonResponse
-    {
-        return $this->orderService->orderUser($id);
-    }
-
     public function index():JsonResponse
     {
         return $this->orderService->index();
