@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,8 @@ class UserService
          $name = $data['name'];
          $email = $data['email'];
          $password = $data['password'];
-         $user = User::where('email', $email)->first();
+         $phone = $data['phone'];
+         $user = User::where('phone', $phone)->first();
          if($user)
          {
              return response()->json([
@@ -65,12 +67,32 @@ class UserService
              'name' => $name,
              'email' => $email,
              'password' => Hash::make($password),
+             "phone" => $phone
          ]);
 
           return response()->json([
               'status' => 'status',
               'message' => 'Your registration was successful'
           ], 201);
+      }
+
+      public function index():JsonResponse
+      {
+        $users = User::where('is_admin', 0)->get();
+          return response()->json([
+              "data" => $users,
+              'status' => 'status',
+          ]);
+      }
+
+
+      public function orderUsers($user):JsonResponse
+      {
+           $data = Order::where('user_id', $user->id)->get();
+            return response()->json([
+              "data" => $data,
+              'status' => 'status',
+          ]);
       }
 
 

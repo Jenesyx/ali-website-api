@@ -27,6 +27,8 @@ Route::prefix('v1')->group(function () {
 
         Route::get('orderUser/{id}', [OrderController::class,'orderUser']);
 
+        Route::post("orderUsers/{user}", [UserController::class,'orderUsers']);
+
 
 
         Route::apiResource('order', OrderController::class);
@@ -34,5 +36,6 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('material', MaterialController::class);
         Route::apiResource('custom', CustomController::class);
         Route::apiResource('functions', FunctionsController::class);
+        Route::apiResource('users', UserController::class);
     });
 });
