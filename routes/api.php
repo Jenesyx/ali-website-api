@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
         Route::get('functions/list', [FunctionsController::class,'list']);
         Route::get('custom/list', [CustomController::class,'list']);
 
-        Route::get('orderUser/{id}', [OrderController::class,'orderUser']);
+//        Route::get('orderDetails/{id}', [OrderController::class,'orderDetails']);
 
         Route::post("orderUsers/{user}", [UserController::class,'orderUsers']);
 

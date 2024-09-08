@@ -44,7 +44,7 @@ class OrderService
       public function show($order):JsonResponse
       {
           return response()->json([
-              'data' => $order,
+              'data' => $order->with('product','user', 'product.materials', 'product.customs', 'product.functions')->get(),
               'status' =>'success',
           ]);
       }
