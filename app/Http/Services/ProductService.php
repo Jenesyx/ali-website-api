@@ -2,7 +2,8 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCustom;
 use App\Models\ProductFunction;
@@ -28,22 +29,25 @@ class ProductService
               'price' => $data['price'],
               'status' => $data['status'],
           ]);
-          if(count($product->materials) > 0)
+
+          $materials = ProductMaterial::where('product_id', $product->id)->get();
+          if(count($materials) > 0)
           {
-              foreach ($product->materials as $material) {
+              foreach ($materials as $material) {
                   $material->delete();
               }
           }
-          if(count($product->customs) > 0)
+          $customs = ProductCustom::where('product_id', $product->id)->get();
+          if(count($customs) > 0)
           {
-              foreach ($product->customs as $custom) {
+              foreach ($customs as $custom) {
                   $custom->delete();
               }
           }
-
-          if(count($product->functions) > 0)
+          $functions = ProductFunction::where('product_id', $product->id)->get();
+          if(count($functions) > 0)
           {
-              foreach ($product->functions as $item) {
+              foreach ($functions as $item) {
                   $item->delete();
               }
           }
@@ -68,7 +72,7 @@ class ProductService
 
               ProductFunction::create([
                   'product_id' => $product->id,
-                  'function_id' => $item,
+                  'functions_id' => $item,
               ]);
           }
           return response()->json([
@@ -80,22 +84,88 @@ class ProductService
 
       public function show($product):JsonResponse
       {
-          $p = new ProductCollection($product);
           return response()->json([
-              'data' => new ProductCollection($product),
+              'data' => new ProductResource($product),
               'status' =>'success',
           ]);
 
       }
 
-      public function update():JsonResponse
+      public function update($data, $product):JsonResponse
       {
-         // Service method logic
+          $product->update([
+              'title' => $data['title'],
+              'description' => $data['description'],
+              'price' => $data['price'],
+              'status' => $data['status'],
+          ]);
+
+          $materials = ProductMaterial::where('product_id', $product->id)->get();
+          if(count($materials) > 0)
+          {
+              foreach ($materials as $material) {
+                  $material->delete();
+              }
+          }
+          $customs = ProductCustom::where('product_id', $product->id)->get();
+          if(count($customs) > 0)
+          {
+              foreach ($customs as $custom) {
+                  $custom->delete();
+              }
+          }
+          $functions = ProductFunction::where('product_id', $product->id)->get();
+          if(count($functions) > 0)
+          {
+              foreach ($functions as $item) {
+                  $item->delete();
+              }
+          }
+
+          foreach ($data['material_id'] as $material) {
+              ProductMaterial::create([
+                  'product_id' => $product->id,
+                  'material_id' => $material,
+              ]);
+          }
+
+          foreach ($data['custom_id'] as $custom) {
+
+              ProductCustom::create([
+                  'product_id' => $product->id,
+                  'custom_id' => $custom,
+              ]);
+          }
+
+          foreach ($data['function_id'] as $item) {
+
+              ProductFunction::create([
+                  'product_id' => $product->id,
+                  'functions_id' => $item,
+              ]);
+          }
+          return response()->json([
+              'message' => 'Product updated successfully',
+              'status' =>'success',
+          ]);
       }
 
-      public function destroy():JsonResponse
+      public function destroy($product):JsonResponse
       {
-         // Service method logic
+         $orders = Order::where('product_id', $product->id)->whereIn('status', ['Awaiting payment', 'Paying'])->get();
+         if(count($orders) > 0)
+         {
+             return  response()->json([
+                 "message" => "This product is already ordered",
+                 "status" => "error",
+             ],409);
+         }
+
+         $product->delete();
+          return response()->json([
+              'message' => 'Product deleted successfully',
+              'status' =>'success',
+          ]);
       }
 
 }
