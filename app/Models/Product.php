@@ -14,16 +14,16 @@ class Product extends Model
 
     public function materials()
     {
-        return $this->hasMany(ProductMaterial::class, 'id', 'product_id');
+        return $this->belongsToMany(Material::class, 'product_materials');
     }
 
     public function customs()
     {
-        return $this->hasMany(ProductCustom::class);
+        return $this->belongsToMany(Custom::class, 'product_customs');
     }
 
     public function functions()
     {
-        return $this->hasMany(ProductCustom::class);
+        return $this->belongsToMany(Functions::class, 'product_functions');
     }
 }

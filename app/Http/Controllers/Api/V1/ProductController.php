@@ -28,4 +28,14 @@ class ProductController extends Controller
     {
         return $this->productService->show($product);
     }
+
+    public function update(Request $request, Product $product):JsonResponse
+    {
+        return $this->productService->update($request->all(), $product);
+    }
+
+    public function destroy(Product $product):JsonResponse
+    {
+        return $this->productService->destroy($product);
+    }
 }
