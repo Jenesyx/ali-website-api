@@ -38,4 +38,10 @@ class OrderController extends Controller
     {
         return $this->orderService->destroy($order);
     }
+
+    public function changeStatus(Request $request,  Order $order):JsonResponse
+    {
+        return $this->orderService->changeStatus($request->all(), $order);
+    }
+
 }
