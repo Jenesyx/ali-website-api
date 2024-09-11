@@ -13,14 +13,14 @@ class OrderService
       public function index():JsonResponse
       {
           return response()->json([
-              'data' => Order::all(),
+              'data' => Order::with('product','user', 'product.materials', 'product.customs', 'product.functions')->get(),
               'status' =>'success',
           ]);
       }
 
       public function orderUser($id)
       {
-          $orders = Order::where('user_id', $id)->get();
+          $orders = Order::where('user_id', $id)->with('product','user', 'product.materials', 'product.customs', 'product.functions')->get();
           return response()->json([
               'data' => $orders,
               'status' => 'success',
@@ -62,6 +62,17 @@ class OrderService
               'status' =>'success',
           ]);
       }
+
+    public function changeStatus($data, $order):JsonResponse
+    {
+        $order->update([
+            'status' => $data['status'],
+        ]);
+        return response()->json([
+            'message' => 'Order status updated successfully',
+            'status' =>'success',
+        ]);
+    }
 
       public function destroy($order):JsonResponse
       {
