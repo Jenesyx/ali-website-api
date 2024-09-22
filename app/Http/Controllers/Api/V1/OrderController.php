@@ -44,4 +44,9 @@ class OrderController extends Controller
         return $this->orderService->changeStatus($request->all(), $order);
     }
 
+    public function postcodeOrder(Request $request, Order $order):JsonResponse
+    {
+        return $this->orderService->postcodeOrder($request->all(), $order);
+    }
+
 }

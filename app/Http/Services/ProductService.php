@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCustom;
 use App\Models\ProductFunction;
 use App\Models\ProductMaterial;
+use App\Models\ProductSize;
 use Illuminate\Http\JsonResponse;
 class ProductService
 {
@@ -15,20 +16,29 @@ class ProductService
       {
          $data = Product::all();
          return  response()->json([
-             'data' => $data,
+             'data' => ProductResource::collection($data) ,
              'status' => 'success',
          ]);
       }
 
       public function store($data):JsonResponse
       {
-
           $product = Product::create([
               'title' => $data['title'],
               'description' => $data['description'],
               'price' => $data['price'],
+              "type" => $data['type'],
               'status' => $data['status'],
           ]);
+
+          $sizes = ProductSize::where("product_id",$product->id)->get();
+
+          if(count($sizes) > 0)
+          {
+              foreach ($sizes as $size) {
+                  $size->delete();
+              }
+          }
 
           $materials = ProductMaterial::where('product_id', $product->id)->get();
           if(count($materials) > 0)
@@ -50,6 +60,13 @@ class ProductService
               foreach ($functions as $item) {
                   $item->delete();
               }
+          }
+
+          foreach ($data['sizes'] as $size) {
+              ProductSize::create([
+                  'product_id' => $product->id,
+                  'size' => $size,
+              ]);
           }
 
 
@@ -98,7 +115,17 @@ class ProductService
               'description' => $data['description'],
               'price' => $data['price'],
               'status' => $data['status'],
+              'type' => $data['type'],
           ]);
+
+          $sizes = ProductSize::where("product_id",$product->id)->get();
+
+          if(count($sizes) > 0)
+          {
+              foreach ($sizes as $size) {
+                  $size->delete();
+              }
+          }
 
           $materials = ProductMaterial::where('product_id', $product->id)->get();
           if(count($materials) > 0)
@@ -120,6 +147,14 @@ class ProductService
               foreach ($functions as $item) {
                   $item->delete();
               }
+          }
+
+
+          foreach ($data['sizes'] as $size) {
+              ProductSize::create([
+                  'product_id' => $product->id,
+                  'size' => $size,
+              ]);
           }
 
           foreach ($data['material_id'] as $material) {

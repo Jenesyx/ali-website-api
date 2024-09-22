@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,12 +30,17 @@ class OrderService
 
       public function store($data):JsonResponse
       {
+          $product = Product::find($data['product_id']);
          Order::create([
              'user_id' => Auth::user()->id,
              'product_id' => $data['product_id'],
-             'price' => $data['price'],
+             'price' => $product->price,
              'size' => $data['size'],
-         ]);
+             'color' => $data['color'],
+             "email" => $data['email'],
+             "password" => $data['password'],
+             'address' => $data['address'],
+             ]);
           return response()->json([
               'message' => 'Order saved successfully',
               'status' =>'success',
@@ -82,5 +88,19 @@ class OrderService
               'status' =>'success',
           ]);
       }
+
+    public function postcodeOrder($data, $order):JsonResponse
+    {
+        $order->update([
+            'tracking_code' => $data['tracking_code'],
+            'postal_code' => $data['postal_code'],
+            'company_post' => $data['company_post'],
+        ]);
+
+        return response()->json([
+            'message' => 'Order completed successfully',
+            'status' =>'success',
+        ]);
+    }
 
 }
