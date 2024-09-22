@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'products';
-    protected $fillable = ['title', 'image_cover', 'description', 'price', 'status'];
+    protected $fillable = ['title', 'image_cover', 'description', 'price', 'type','status'];
 
     public function materials()
     {
@@ -25,5 +25,10 @@ class Product extends Model
     public function functions()
     {
         return $this->belongsToMany(Functions::class, 'product_functions');
+    }
+
+    public function sizes()
+    {
+        return $this->hasMany(ProductSize::class, 'product_id', 'id');
     }
 }

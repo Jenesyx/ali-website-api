@@ -19,12 +19,15 @@ Route::prefix('v1')->group(function () {
         Route::post('register', 'register');
     });
 
+
+
     Route::prefix('portal')->middleware('auth:sanctum')->group(function (){
     // Route of lists  :
         Route::get('material/list', [MaterialController::class,'list']);
         Route::get('functions/list', [FunctionsController::class,'list']);
         Route::get('custom/list', [CustomController::class,'list']);
         Route::post('changeStatus/{order}', [OrderController::class,'changeStatus']);
+        Route::post('postcodeOrder/{order}', [OrderController::class,'postcodeOrder']);
 //        Route::get('orderDetails/{id}', [OrderController::class,'orderDetails']);
 
         Route::post("orderUsers/{user}", [UserController::class,'orderUsers']);

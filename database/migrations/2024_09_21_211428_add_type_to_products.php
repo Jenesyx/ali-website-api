@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->enum('status',['Awaiting payment', 'Paying', 'was paid', 'sent', 'activated', 'error'])->after('size')->default('Awaiting payment');
-            $table->text('error_message')->nullable()->after('status');
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('type')->nullable()->after('price');
         });
     }
 
@@ -22,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             //
         });
     }

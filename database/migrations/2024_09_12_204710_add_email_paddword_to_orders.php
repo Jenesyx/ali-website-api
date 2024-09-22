@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->enum('status',['Awaiting payment', 'Paying', 'was paid', 'sent', 'activated', 'error'])->after('size')->default('Awaiting payment');
-            $table->text('error_message')->nullable()->after('status');
+            $table->string('email')->nullable()->after('status');
+            $table->string('password')->nullable()->after('email');
+
         });
     }
 

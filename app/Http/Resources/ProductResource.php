@@ -19,9 +19,11 @@ class ProductResource extends JsonResource
             "title" => $this->title,
             'description' => $this->description,
             'price' => number_format($this->price),
+            'type' => $this->type,
             'materials' => $this->materials,
             'functions' => $this->functions,
-            'customs' => $this->customs
+            'customs' => $this->customs,
+            "sizes" => $this->sizes
         ];
      }
 }
