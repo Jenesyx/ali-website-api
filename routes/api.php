@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\CustomController;
 use App\Http\Controllers\Api\V1\FunctionsController;
+use App\Http\Controllers\Api\V1\ImageController;
 use App\Http\Controllers\Api\V1\MaterialController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ProductController;
@@ -33,7 +34,7 @@ Route::prefix('v1')->group(function () {
         Route::post("orderUsers/{user}", [UserController::class,'orderUsers']);
 
 
-
+        Route::apiResource('image', ImageController::class);
         Route::apiResource('order', OrderController::class);
         Route::apiResource('product', ProductController::class);
         Route::apiResource('material', MaterialController::class);
