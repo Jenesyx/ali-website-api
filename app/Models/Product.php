@@ -46,4 +46,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductTerial::class, 'product_id', 'id');
     }
+
+    public function titles()
+    {
+        return $this->hasMany(ProductTitle::class, 'product_id', 'id');
+    }
 }
