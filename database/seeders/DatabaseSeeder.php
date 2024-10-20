@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(ImageSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(MaterialSeeder::class);
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSizeSeeder::class);
         $this->call(ProductTerialSeeder::class);
         $this->call(ProductColorSeeder::class);
+        $this->call(ProductTitleSeeder::class);
 
 
 //        User::factory()->create([
