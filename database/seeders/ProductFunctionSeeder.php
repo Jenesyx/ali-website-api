@@ -122,10 +122,10 @@ class ProductFunctionSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            ProductFunction::create([
+            ProductFunction::upsert([
                 'product_id' => $item['product_id'],
                 'functions_id' => $item['function_id'],
-            ]);
+            ],['product_id','functions_id']);
         }
     }
 }
