@@ -33,11 +33,11 @@ class ProductTerialSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            ProductTerial::create([
+            ProductTerial::upsert([
                 'product_id' => $item['product_id'],
                 'name' => $item['name'],
                 'subprice' => $item['subprice'],
-            ]);
+            ],['product_id','name','subprice']);
         }
     }
 }

@@ -27,10 +27,10 @@ class ProductSizeSeeder extends Seeder
         foreach ($data as $item) {
 
             foreach ($item['size'] as $size) {
-                \App\Models\ProductSize::create([
+                \App\Models\ProductSize::upsert([
                     'product_id' => $item['product_id'],
                     'size' => $size
-                ]);
+                ],['product_id','size']);
             }
         }
     }

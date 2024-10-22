@@ -38,11 +38,11 @@ class ProductColorSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            ProductColor::create([
+            ProductColor::upsert([
                 'product_id' => $item['product_id'],
                 'color' => $item['color'],
                 'hex' => $item['hex'],
-            ]);
+            ],['product_id', 'color', 'hex']);
         }
     }
 }

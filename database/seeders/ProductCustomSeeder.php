@@ -33,10 +33,10 @@ class ProductCustomSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            ProductCustom::create([
+            ProductCustom::upsert([
                 'product_id' => $item['product_id'],
                 'custom_id' => $item['custom_id'],
-            ]);
+            ],['product_id','custom_id']);
         }
     }
 }

@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'title' => 'ClothesProduct',
+                'title' => 'Infinity T-shirt',
                 'info' => "This is one of those t-shirts that you have to buy when you see it! This logo was designed by Alijenesyx with inspiration from the Persian calligraphy font along with Ali's own creativity, which depicts the hardships he went through in his life in every line of this logo. Everyone gives beauty to this t-shirt with their own personality and makes it unique. Although this logo is Ali himself, it got the name infinity because of drawing the twist of the world.",
                 'description' => 'Special and Unique T-Shirt',
                 'price' => 35,

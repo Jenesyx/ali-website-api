@@ -35,10 +35,10 @@ class ProductMaterialSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            ProductMaterial::create([
+            ProductMaterial::upsert([
                 'product_id' => $item['product_id'],
                 'material_id' => $item['material_id'],
-            ]);
+            ], ['product_id', 'material_id']);
         }
     }
 }
