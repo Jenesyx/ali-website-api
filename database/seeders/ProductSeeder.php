@@ -21,7 +21,9 @@ class ProductSeeder extends Seeder
                 'info' =>  null,
                 'price' => 15,
                 'type' => 'digital',
-                'status' => 1
+                'status' => 1,
+                'image_cover' =>'product1.jpg',
+                'page' => 'product'
             ],
             [
                 'id' => 2,
@@ -30,7 +32,9 @@ class ProductSeeder extends Seeder
                 'description' => 'Special and Unique T-Shirt',
                 'price' => 35,
                 'type' => 'physical',
-                'status' => 1
+                'status' => 1,
+                'image_cover' =>'WhiteT-Shirt1.png',
+                'page' => 'ClothesProduct'
             ],
             [
                 'id' => 3,
@@ -39,7 +43,9 @@ class ProductSeeder extends Seeder
                 'description' => 'Special and Unique T-Shirt',
                 'price' => 35,
                 'type' => 'physical',
-                'status' => 1
+                'status' => 1,
+                'image_cover' =>'IroniTshirt1.png',
+                'page' => 'ClothesProduct'
             ],
             [
                 'id' => 4,
@@ -48,7 +54,9 @@ class ProductSeeder extends Seeder
                 'price' => 9,
                 'info' => null,
                 'type' => 'digital',
-                'status' => 1
+                'status' => 1,
+                'image_cover' =>'Spotify1.png',
+                'page' => 'Spotify'
             ],
             [
                 'id' => 5,
@@ -57,7 +65,9 @@ class ProductSeeder extends Seeder
                 'info' => null,
                 'price' => 20,
                 'type' => 'digital',
-                'status' => 1
+                'status' => 1,
+                'image_cover' =>'product1.jpg',
+                'page' => 'product'
             ],
         ];
         for ($i = 0; $i < 5; $i++) {
@@ -69,6 +79,8 @@ class ProductSeeder extends Seeder
                 'info' => $data[$i]['info'],
                 'type' => $data[$i]['type'],
                 'status' => $data[$i]['status'],
+                'image_cover' => $data[$i]['image_cover'],
+                'page' => $data[$i]['page'],
             ],['id','title', 'description', 'price', 'type', 'status']);
         }
     }
